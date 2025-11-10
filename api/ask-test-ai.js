@@ -1,19 +1,4 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-require('dotenv').config();
-
-const apiKey = process.env.GEMINI_API_KEY;
-if (!apiKey) {
-  throw new Error('GEMINI_API_KEY is not set');
-}
-
-const ai = new GoogleGenerativeAI(apiKey);
-const config = { responseMimeType: 'text/plain' };
-const model = ai.getGenerativeModel({
-  model: 'gemini-2.5-flash',
-  generationConfig: config,
-  systemInstruction:
-    'Respond in plain text without any markdown formatting, asterisks, bold, italics, or special characters. Keep responses clean, natural, and easy to read.',
-});
 
 module.exports = async (req, res) => {
   // CORS headers
@@ -38,7 +23,21 @@ module.exports = async (req, res) => {
     return res.status(429).json({ error: 'Rate limit exceeded' });
   }
 
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'API key not configured' });
+  }
+
   try {
+    const ai = new GoogleGenerativeAI(apiKey);
+    const config = { responseMimeType: 'text/plain' };
+    const model = ai.getGenerativeModel({
+      model: 'gemini-2.5-flash',
+      generationConfig: config,
+      systemInstruction:
+        'Respond in plain text without any markdown formatting, asterisks, bold, italics, or special characters. Keep responses clean, natural, and easy to read.',
+    });
+
     const result = await model.generateContent(message);
     const text = await result.response.text();
     res.json({ text });
