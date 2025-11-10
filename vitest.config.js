@@ -5,5 +5,22 @@ export default defineConfig({
     exclude: ['node_modules/**', 'tests/**'],
     environment: 'jsdom',
     globals: true,
+    coverage: {
+      reporter: ['text', 'lcov'],
+      exclude: [
+        'node_modules/**',
+        'tests/**',
+        'src/main.tsx',
+        'src/vite-env.d.ts',
+      ],
+      thresholds: {
+        global: {
+          statements: 60,
+          branches: 30,
+          functions: 40,
+          lines: 60,
+        },
+      },
+    },
   },
 });
