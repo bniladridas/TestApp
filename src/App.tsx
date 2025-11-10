@@ -67,7 +67,7 @@ function AppContent() {
 
   // Auto-scroll to latest message
   useEffect(() => {
-    if (chatOpen && chatEndRef.current) {
+    if (chatOpen && chatEndRef.current && chatEndRef.current.scrollIntoView) {
       chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [chatMessages, chatOpen]);

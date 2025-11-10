@@ -1,6 +1,6 @@
 /// <reference types="vitest/globals" />
 import { describe, it, beforeEach, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';
 
@@ -27,5 +27,29 @@ describe('App', () => {
   it('renders the app', () => {
     render(<App />);
     expect(screen.getByText('TestAI')).toBeInTheDocument();
+  });
+
+  it('toggles dark mode', () => {
+    render(<App />);
+    const toggleButton = screen.getByLabelText('Toggle dark mode');
+    expect(toggleButton).toBeInTheDocument();
+    // Initial state
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
+    // Click to toggle
+    act(() => {
+      fireEvent.click(toggleButton);
+    });
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+  });
+
+  it('opens chat on button click', () => {
+    render(<App />);
+    const chatButton = screen.getByLabelText('Open Test AI Chat');
+    expect(chatButton).toBeInTheDocument();
+    act(() => {
+      fireEvent.click(chatButton);
+    });
+    // Check if chat is open, perhaps by checking for input
+    expect(screen.getByPlaceholderText('Ask Test AI...')).toBeInTheDocument();
   });
 });
