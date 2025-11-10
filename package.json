@@ -12,9 +12,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "duplicate-check": "jscpd --min-lines 10 --min-tokens 50 --ignore 'node_modules/**,dist/**' --reporters consoleFull .",
-    "preflight": "npm run lint && npm run duplicate-check && npm run build && npm test && npm run test:e2e",
+    "preflight": "npm run lint && npm run duplicate-check && npm run build && npm run test:coverage && npm run test:e2e",
     "cli": "node cli/index.js"
   },
   "dependencies": {
@@ -41,6 +42,7 @@
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/coverage-v8": "^4.0.8",
     "autoprefixer": "^10.4.18",
     "concurrently": "^9.2.0",
     "eslint": "^9.9.1",
