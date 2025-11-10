@@ -1,6 +1,25 @@
 # BratUI
 
-![god](https://github.com/user-attachments/assets/40a62c81-3254-449b-93a5-1a4d332762fb)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+A modern UI library built with React and TypeScript, featuring AI-powered components and seamless integration.
+
+## Installation
+
+```sh
+npm install
+```
+
+## Usage
+
+BratUI is a web application built with React and Vite. To run it locally:
+
+```sh
+npm install
+npm run dev
+```
+
+Then open your browser to `http://localhost:5173` to view the application.
 
 ## Scripts
 
@@ -20,4 +39,17 @@
 - `vite.config.ts`: Build configuration
 - `server.cjs`: Backend API and static file server
 - `vercel.json`: Deployment configuration
-- `env.example`: Environment variables template 
+- `env.example`: Environment variables template
+
+## Requirements
+
+- Node.js 18 or later
+- npm or yarn
+
+## Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+## License
+
+MIT 
