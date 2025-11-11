@@ -53,10 +53,15 @@ for (const branch of branches) {
 
     // Run tests
     try {
-      execSync('npm test -- --run', { stdio: 'pipe' });
+      execSync('npm test -- --run', {
+        stdio: 'pipe',
+        env: { ...process.env, GEMINI_API_KEY: 'test' },
+      });
       console.log(`  ✅ Tests pass`);
     } catch (error) {
-      console.log(`  ❌ Tests fail`);
+      console.log(
+        `  ❌ Tests fail: ${error.stderr?.toString() || error.message}`,
+      );
       allPass = false;
     }
 
