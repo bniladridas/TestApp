@@ -54,13 +54,16 @@ app.post('/api/ask-test-ai', apiLimiter, async (req, res) => {
     console.error('Error:', error);
 
     // Check for specific error types
+    const errorText = error.message || error.toString();
     if (
-      error.message?.includes('503') ||
-      error.message?.includes('429') ||
-      error.message?.includes('overloaded') ||
-      error.message?.includes('temporarily unavailable') ||
-      error.message?.includes('quota') ||
-      error.message?.includes('rate limit')
+      errorText.includes('503') ||
+      errorText.includes('429') ||
+      errorText.includes('Too Many Requests') ||
+      errorText.includes('overloaded') ||
+      errorText.includes('temporarily unavailable') ||
+      errorText.includes('quota') ||
+      errorText.includes('rate limit') ||
+      error.status === 429
     ) {
       return res.json({
         text: "I'm a bit busy right now with lots of questions! How's your day going? 😊",
