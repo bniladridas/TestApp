@@ -23,8 +23,24 @@ async function main() {
     console.log('\n---');
     console.log('Response generated cleanly without noise.');
   } catch (error) {
-    console.error('Error:', error.message);
-    process.exit(1);
+    // Check for specific error types and provide fallback
+    const errorText = error.message || error.toString();
+    if (
+      errorText.includes('429') ||
+      errorText.includes('Too Many Requests') ||
+      errorText.includes('quota') ||
+      errorText.includes('rate limit') ||
+      error.status === 429
+    ) {
+      console.log(
+        "I'm a bit busy right now with lots of questions! How's your day going? 😊",
+      );
+      console.log('\n---');
+      console.log('Response generated with fallback (quota exceeded).');
+    } else {
+      console.error('Error:', error.message);
+      process.exit(1);
+    }
   }
 }
 
