@@ -53,7 +53,7 @@ for (const branch of branches) {
 
     // Run tests
     try {
-      execSync('npm test -- lib/ --run', {
+      execSync('npm test -- --run', {
         stdio: 'pipe',
         env: { ...process.env, GEMINI_API_KEY: 'test' },
       });
