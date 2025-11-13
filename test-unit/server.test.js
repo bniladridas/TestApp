@@ -34,8 +34,13 @@ vi.mock('./lib/ai.mjs', () => ({
 }));
 
 vi.mock('@octokit/webhooks', () => ({
-  createNodeMiddleware: vi.fn(() => (req, res, next) => next()),
-});
+  createNodeMiddleware: vi.fn(
+    () =>
+      function (req, res, next) {
+        next();
+      },
+  ),
+}));
 
 // Set default mock behavior
 mockGenerateContent.mockResolvedValue({
