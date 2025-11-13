@@ -28,23 +28,6 @@ vi.mock('@octokit/app', () => ({
   },
 }));
 
-// Mock AI module
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-vi.mock('../lib/ai.mjs', () => ({
-=======
-vi.mock('./lib/ai.mjs', () => ({
->>>>>>> Stashed changes
-=======
-vi.mock('./lib/ai.mjs', () => ({
->>>>>>> Stashed changes
-=======
-vi.mock('./lib/ai.mjs', () => ({
->>>>>>> Stashed changes
-  askAI: vi.fn(),
-}));
-
 vi.mock('@octokit/webhooks', () => ({
   createNodeMiddleware: vi.fn(() => (req, res, next) => next()),
 }));
@@ -55,20 +38,6 @@ mockGenerateContent.mockResolvedValue({
     text: vi.fn().mockReturnValue('Mocked AI response'),
   },
 });
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import { askAI } from '../lib/ai.mjs';
-=======
-import { askAI } from './lib/ai.mjs';
->>>>>>> Stashed changes
-=======
-import { askAI } from './lib/ai.mjs';
->>>>>>> Stashed changes
-=======
-import { askAI } from './lib/ai.mjs';
->>>>>>> Stashed changes
 import app from '../server.cjs';
 
 describe('Server API', () => {
