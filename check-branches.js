@@ -8,6 +8,15 @@ const originalBranch = execSync('git rev-parse --abbrev-ref HEAD')
   .toString()
   .trim();
 
+// Stash any local changes to avoid conflicts when switching branches
+try {
+  execSync('git stash push -m "temp stash for branch check"', {
+    stdio: 'pipe',
+  });
+} catch (error) {
+  // No changes to stash, continue
+}
+
 const branches = [
   'commit-msg-enforcer',
   'code-review-assistant',
@@ -84,6 +93,13 @@ for (const branch of branches) {
 
 // Switch back to original branch
 execSync(`git checkout ${originalBranch}`, { stdio: 'pipe' });
+
+// Restore stashed changes
+try {
+  execSync('git stash pop', { stdio: 'pipe' });
+} catch (error) {
+  // No stash to pop, continue
+}
 
 if (allPass) {
   console.log('🎉 All branches meet the conditions!');
