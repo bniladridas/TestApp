@@ -156,6 +156,12 @@ app.get('/api/health', (_, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Reset users for testing
+app.post('/api/test/reset', (_, res) => {
+  users.length = 0;
+  res.json({ status: 'reset' });
+});
+
 app.post(
   '/api/ask-test-ai',
   apiLimiter,
@@ -194,11 +200,9 @@ app.post(
       }
 
       // Other errors
-      res
-        .status(500)
-        .json({
-          error: isProduction ? 'Internal server error' : error.message,
-        });
+      res.status(500).json({
+        error: isProduction ? 'Internal server error' : error.message,
+      });
     }
   },
 );
