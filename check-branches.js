@@ -69,6 +69,7 @@ for (const branch of branches) {
         env: {
           ...process.env,
           GEMINI_API_KEY: 'test',
+          GITHUB_APP_ID: '123',
           GITHUB_PRIVATE_KEY: 'test',
           GITHUB_WEBHOOK_SECRET: 'test',
         },
