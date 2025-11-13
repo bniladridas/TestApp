@@ -30,6 +30,15 @@ app.use(
 
 const askAIPromise = import('./lib/ai.js').then(({ askAI }) => askAI);
 
+// GitHub App setup (conditional for testing)
+const githubApp = process.env.GITHUB_APP_ID
+  ? new App({
+      appId: process.env.GITHUB_APP_ID,
+      privateKey: process.env.GITHUB_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      webhooks: { secret: process.env.GITHUB_WEBHOOK_SECRET },
+    })
+  : null;
+
 // Rate limiter for API endpoints
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
