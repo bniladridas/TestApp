@@ -28,17 +28,14 @@ vi.mock('@octokit/app', () => ({
   },
 }));
 
-<<<<<<< Updated upstream
-=======
 // Mock AI module
 vi.mock('./lib/ai.mjs', () => ({
   askAI: vi.fn(),
 }));
 
->>>>>>> Stashed changes
 vi.mock('@octokit/webhooks', () => ({
   createNodeMiddleware: vi.fn(() => (req, res, next) => next()),
-}));
+});
 
 // Set default mock behavior
 mockGenerateContent.mockResolvedValue({
@@ -46,12 +43,9 @@ mockGenerateContent.mockResolvedValue({
     text: vi.fn().mockReturnValue('Mocked AI response'),
   },
 });
-<<<<<<< Updated upstream
-=======
 
 import { askAI } from './lib/ai.mjs';
->>>>>>> Stashed changes
-import app from '../server.cjs';
+import app from '../server.mjs';
 
 describe('Server API', () => {
   beforeEach(() => {
