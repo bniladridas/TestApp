@@ -66,7 +66,13 @@ for (const branch of branches) {
     try {
       execSync(testCommand, {
         stdio: 'pipe',
-        env: { ...process.env, GEMINI_API_KEY: 'test' },
+        env: {
+          ...process.env,
+          GEMINI_API_KEY: 'test',
+          GITHUB_APP_ID: 'test',
+          GITHUB_PRIVATE_KEY: 'test',
+          GITHUB_WEBHOOK_SECRET: 'test',
+        },
       });
       console.log(`  ✅ Tests pass`);
     } catch (error) {
