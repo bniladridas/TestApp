@@ -3,8 +3,6 @@ const cors = require('cors');
 const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const { App } = require('@octokit/app');
-const { createNodeMiddleware } = require('@octokit/webhooks');
 require('dotenv').config();
 
 const app = express();
@@ -30,11 +28,7 @@ app.use(
   }),
 );
 
-<<<<<<< Updated upstream
-const { askAI } = require('./lib/ai.cjs');
-=======
 import { askAI } from './lib/ai.cjs';
->>>>>>> Stashed changes
 
 // GitHub App setup (conditional for testing)
 const githubApp = process.env.GITHUB_APP_ID
@@ -45,9 +39,6 @@ const githubApp = process.env.GITHUB_APP_ID
     })
   : null;
 
-<<<<<<< Updated upstream
-// Webhook handlers (branch-specific, added in feature branches)
-=======
 // Webhook handlers
 if (githubApp) {
   githubApp.webhooks.on('issues.labeled', async ({ octokit, payload }) => {
@@ -64,7 +55,6 @@ if (githubApp) {
     createNodeMiddleware(githubApp.webhooks, { path: '/api/webhooks/github' }),
   );
 }
->>>>>>> Stashed changes
 
 // Rate limiter for API endpoints
 const apiLimiter = rateLimit({
