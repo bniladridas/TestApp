@@ -46,7 +46,7 @@ vi.mock('bcryptjs', () => ({
 
 // Mock AI module
 vi.mock('../lib/ai.mjs', () => ({
-  askAI: vi.fn(() => Promise.resolve('Mocked AI response')),
+  askAI: vi.fn().mockResolvedValue('Mocked AI response'),
 }));
 
 vi.mock('@octokit/webhooks', () => ({
