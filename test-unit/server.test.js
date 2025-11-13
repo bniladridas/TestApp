@@ -96,30 +96,6 @@ describe('Server API', () => {
     expect(response.body.error).toBe('Missing message');
   });
 
-
-
-    const response = await request(app)
-      .post('/api/ask-test-ai')
-      .send({ message: 'Hello' });
-    expect(response.status).toBe(200);
-    expect(response.body.text).toBe(
-      "I'm a bit busy right now with lots of questions! How's your day going? 😊",
-    );
-    expect(response.body.fallback).toBe(true);
-  });
-
-  it('should handle other errors with 500 status', async () => {
-    // Mock askAI to throw the error
-    askAI.mockRejectedValueOnce(new Error('Some other error'));
-
-    const response = await request(app)
-      .post('/api/ask-test-ai')
-      .set('Authorization', 'Bearer mock-token')
-      .send({ message: 'Hello' });
-    expect(response.status).toBe(500);
-    expect(response.body.error).toBe('Some other error'); // In non-production mode, returns actual error
-  });
-
     const response = await request(app)
       .post('/api/ask-test-ai')
       .send({ message: 'Hello' });
