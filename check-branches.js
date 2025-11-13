@@ -3,6 +3,9 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
 
+// The script hardcodes checking out the main branch at the end. This could be unexpected if the script is run from a different branch. It's better practice to return to the original branch.
+const originalBranch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+
 const branches = [
   'commit-msg-enforcer',
   'code-review-assistant',
@@ -17,23 +20,18 @@ console.log('Checking conditions for all feature branches...\n');
 
 let allPass = true;
 
-for (const branch of branches) {
+try {
   console.log(`Checking branch: ${branch}`);
   try {
     // Checkout branch
     execSync(`git checkout ${branch}`, { stdio: 'pipe' });
 
     // Check if lib/feature.js exists
-    const fileMap = {
-      'commit-msg-enforcer': 'commit-msg-enforcer',
+    // The fileMap is quite verbose, with most keys mapping to identical values. The fallback logic branch.replace(/-/g, '') is also unused and would likely produce incorrect names if it were ever triggered. You can make this code more concise and maintainable by defining a map for only the exceptional cases and using the branch name as the default.
+    const featureNameMap = {
       'code-review-assistant': 'code-review',
-      'issue-manager': 'issue-manager',
-      'docs-bot': 'docs-bot',
-      'security-scanner': 'security-scanner',
-      'release-helper': 'release-helper',
-      'workflow-automator': 'workflow-automator',
     };
-    const featureName = fileMap[branch] || branch.replace(/-/g, '');
+    const featureName = featureNameMap[branch] || branch;
     const featureFile = `lib/${featureName}.js`;
     if (!fs.existsSync(featureFile)) {
       console.log(`  ❌ Missing ${featureFile}`);
@@ -52,8 +50,8 @@ for (const branch of branches) {
     }
 
     // Run tests (lib tests for branches, all for main)
-    const testCommand =
-      branch === 'main' ? 'npm test -- --run' : 'npm test -- lib/ --run';
+    // The test command is currently configured to only run tests within the lib/ directory for feature branches. This means test-unit/server.test.js, where you've added new Octokit mocks, won't be executed. This seems to defeat the purpose of adding those mocks for full coverage on all branches. Additionally, the branch === 'main' check is currently dead code as 'main' is not in the branches array. To ensure all tests are run on all branches, you should use the general test command.
+    const testCommand = 'npm test -- --run';
     try {
       execSync(testCommand, {
         stdio: 'pipe',
@@ -81,9 +79,10 @@ for (const branch of branches) {
   }
   console.log('');
 }
-
-// Switch back to main
-execSync('git checkout main', { stdio: 'pipe' });
+} finally {
+  // Switch back to original branch
+  execSync(`git checkout ${originalBranch}`, { stdio: 'pipe' });
+}
 
 if (allPass) {
   console.log('🎉 All branches meet the conditions!');
