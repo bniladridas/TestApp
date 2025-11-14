@@ -361,26 +361,22 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       );
       console.log(`Database: ${process.env.DATABASE_URL ? 'Configured' : 'Not configured'}`);
     });
+  })();
 
-    // Handle graceful shutdown
-    process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
-    process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+  // Handle graceful shutdown
+  process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+  process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
-      // Handle uncaught exceptions
-      process.on('uncaughtException', (error) => {
-        console.error('Uncaught Exception:', error);
-        gracefulShutdown('uncaughtException');
-      });
+  // Handle uncaught exceptions
+  process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+    gracefulShutdown('uncaughtException');
+  });
 
-      process.on('unhandledRejection', (reason, promise) => {
-        console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-        gracefulShutdown('unhandledRejection');
-      });
-    })
-    .catch((error) => {
-      console.error('Failed to initialize database:', error);
-      process.exit(1);
-    });
+  process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    gracefulShutdown('unhandledRejection');
+  });
 }
 
 export default app;
