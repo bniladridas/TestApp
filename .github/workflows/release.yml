@@ -33,11 +33,15 @@ jobs:
           git log --oneline --pretty=format:"%s" | grep "^docs:" | sed 's/^/- /' >> release_notes.md
           echo "" >> release_notes.md
           echo "## CI" >> release_notes.md
-          git log --oneline --pretty=format:"%s" | grep "^ci:" | sed 's/^/- /' >> release_notes.md
+           git log --oneline --pretty=format:"%s" | grep "^ci:" | sed 's/^/- /' >> release_notes.md
 
       - name: Create Release
         run: |
-          NOTES=$(cat release_notes.md)
-          gh release create ${{ github.ref_name }} --title "${{ github.ref_name }}" --notes "$NOTES"
+          if gh release view ${{ github.ref_name }} --json id > /dev/null 2>&1; then
+            echo "Release ${{ github.ref_name }} already exists, skipping creation."
+          else
+            NOTES=$(cat release_notes.md)
+            gh release create ${{ github.ref_name }} --title "${{ github.ref_name }}" --notes "$NOTES"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
