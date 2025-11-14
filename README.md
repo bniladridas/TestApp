@@ -214,7 +214,7 @@ act -j build-and-push -P ubuntu-latest=catthehacker/ubuntu:act-latest --containe
 
 TestApp supports Docker for containerized deployment. Images are automatically built and pushed to Docker Hub and GitHub Container Registry on main branch pushes and releases.
 
-To build locally: `docker build -t testapp:latest docker/`
+To build locally: `docker build -t testapp:latest -f docker/Dockerfile .`
 
 See [Docker documentation](docs/docker.md) for complete details.
 

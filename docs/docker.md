@@ -20,7 +20,7 @@ hadolint docker/Dockerfile
 To build the Docker image locally:
 
 ```sh
-docker build -t testapp:latest docker/
+docker build -t testapp:latest -f docker/Dockerfile .
 ```
 
 ## Running Locally
