@@ -14,7 +14,9 @@ echo "Rewriting commit messages with git-filter-repo..."
 git filter-repo --message-callback "
 import subprocess, os
 script = os.path.join(os.getcwd(), 'hooks', 'rewrite_msg.sh')
-lambda m: subprocess.run([script], input=m.decode('utf-8'), capture_output=True, text=True).stdout.encode('utf-8')
+def callback(m):
+    return subprocess.run([script], input=m.decode('utf-8'), capture_output=True, text=True).stdout.encode('utf-8')
+callback
 " --force
 
 echo "Force pushing all branches..."
