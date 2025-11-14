@@ -8,31 +8,29 @@ Bundle size monitoring is crucial for maintaining optimal application performanc
 
 ## Implementation
 
-TestApp uses a GitHub Action to automatically monitor bundle size changes on pull requests and commits.
+TestApp uses a GitHub Action to automatically monitor bundle size changes on pull requests.
 
 ### GitHub Action Configuration
 
-The bundle size action is configured in `.github/workflows/bundle-size.yml` (or integrated into existing CI workflows).
+The bundle size action is configured in `.github/workflows/pr.yml`.
 
 #### Key Features
 
-- **Automated Checks**: Runs on every push to main and pull requests
+- **Automated Checks**: Runs on pull requests
 - **Size Limits**: Configurable thresholds for warning and error states
 - **Compression Analysis**: Reports both uncompressed and gzipped sizes
 - **Historical Tracking**: Maintains history of bundle size over time
-- **Failure Prevention**: Can block merges if bundle size exceeds limits
+- **Reporting**: Reports bundle size changes without blocking merges
 
 #### Configuration Options
 
+The action is configured with minimal options, using default patterns and no size thresholds:
+
 ```yaml
-- name: Bundle Size Check
-  uses: preactjs/compressed-size-action@v2 # or similar action
+- name: Compressed Size Action
+  uses: preactjs/compressed-size-action@v2
   with:
     repo-token: ${{ secrets.GITHUB_TOKEN }}
-    pattern: 'dist/**/*.{js,css}'
-    compression: 'gzip'
-    maximum-change-threshold: '100KB' # Warn if increase > 100KB
-    error-on-threshold: '500KB' # Fail if increase > 500KB
 ```
 
 ### Bundle Analysis
@@ -82,8 +80,8 @@ Bundle size data can be integrated with monitoring dashboards:
 
 #### Thresholds and Policies
 
-- **Warning Threshold**: 50KB increase triggers review
-- **Error Threshold**: 200KB increase blocks merge
+Currently, no size thresholds are enforced. The action reports size changes for manual review.
+
 - **Monthly Review**: Team reviews bundle size trends monthly
 
 ### Troubleshooting
@@ -108,12 +106,11 @@ Bundle size data can be integrated with monitoring dashboards:
 #### Debugging Bundle Size
 
 ```bash
-# Analyze bundle composition
+# Build and view sizes (Vite shows sizes automatically)
 npm run build
-npx webpack-bundle-analyzer dist/static/js/*.js
 
 # Check individual chunk sizes
-ls -lh dist/static/js/
+ls -lh dist/assets/
 ```
 
 ### Best Practices
