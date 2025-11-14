@@ -5,7 +5,6 @@ This file tracks open issues and assigned work for the TestApp project.
 ## Open Issues
 
 - [x] Implement user authentication
-- [x] Fix E2E tests database connectivity issues
 - [ ] Optimize chat message rendering for large conversations
 - [ ] Add error handling for network failures in CLI
 - [ ] Improve accessibility (ARIA labels, keyboard navigation)
@@ -21,6 +20,10 @@ This file tracks open issues and assigned work for the TestApp project.
 
 ## Recently Completed
 
+- [x] Fix GitHub Actions DATABASE_URL passing to composite actions
+- [x] Add Husky pre-commit hooks documentation
+- [x] Update rewrite-commits script to use git-filter-repo with confirmation
+- [x] Rewrite commit-msg hook to use JS module for consistency
 - [x] Set up PostgreSQL service for E2E tests in CI
 - [x] Fix bcrypt mocking issues in server tests
 - [x] All preflight checks now passing (lint, build, tests, coverage)
