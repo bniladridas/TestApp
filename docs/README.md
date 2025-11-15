@@ -9,6 +9,11 @@ TestApp is a simple single-page web application featuring AI-powered chat functi
 - **CLI Tool**: Command-line interface for AI queries
 - **Responsive**: Works on desktop and mobile
 - **Cross-Platform**: Runs on macOS, Linux, and Windows
+- **Internationalization**: Multi-language support (English/Spanish)
+- **Progressive Web App**: Offline support with service worker
+- **Accessibility**: ARIA labels, skip links, semantic HTML
+- **Error Boundaries**: Graceful error handling and fallbacks
+- **Authentication**: Secure user signup/login with JWT
 
 ## Quick Start
 
@@ -20,22 +25,28 @@ TestApp is a simple single-page web application featuring AI-powered chat functi
 
 ## Architecture
 
-- **Frontend**: React + TypeScript + Tailwind CSS
+- **Frontend**: React + TypeScript + Tailwind CSS + Vite
 - **Backend**: Node.js server with Express (ES modules)
+- **Database**: PostgreSQL with connection pooling
 - **AI**: Google Generative AI (Gemini)
-- **Deployment**: Vercel (static + serverless)
+- **PWA**: Vite PWA plugin with service worker
+- **i18n**: i18next for internationalization
+- **Deployment**: Docker + Vercel (static + serverless)
 
 ## Directory Structure
 
 ```
-├── src/          # Frontend source
-├── cli/          # CLI tool
-├── lib/          # Shared ES modules (.mjs)
-├── test-unit/    # Unit tests
-├── tests/        # E2E tests
-├── docs/         # Documentation
-├── config/       # Configuration files
-└── tools/        # Utility scripts and tools
+├── src/              # Frontend source (React + TypeScript)
+│   ├── locales/      # Internationalization files
+│   └── ErrorBoundary.tsx  # Error handling component
+├── cli/              # CLI tool
+├── lib/              # Shared ES modules (.mjs)
+├── e2e/              # End-to-end tests (Playwright)
+├── test-unit/        # Unit tests (Vitest)
+├── docs/             # Documentation
+├── docker/           # Docker configuration
+├── .github/          # GitHub Actions workflows
+└── tools/            # Utility scripts and tools
 ```
 
 ## Troubleshooting

@@ -1,6 +1,19 @@
 # TestApp
 
-A simple single-page web application with AI-powered chat functionality, built with React and Vite.
+A modern single-page web application with AI-powered chat functionality, featuring internationalization, offline support, and accessibility enhancements. Built with React, Vite, and integrated with Google's Gemini AI.
+
+## Features
+
+- **AI Chat**: Interactive chat with Gemini 2.5 Flash model
+- **Authentication**: Secure user signup/login with JWT tokens
+- **Internationalization**: Multi-language support (English/Spanish)
+- **Progressive Web App**: Offline support with service worker
+- **Accessibility**: ARIA labels, skip links, semantic HTML
+- **Error Boundaries**: Graceful error handling and fallbacks
+- **Dark Mode**: Theme switching with system preference detection
+- **CLI Tool**: Command-line interface for AI queries
+- **Responsive Design**: Works on desktop and mobile
+- **Cross-Platform**: Runs on macOS, Linux, and Windows
 
 ## Clone
 
