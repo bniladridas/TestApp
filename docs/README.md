@@ -46,6 +46,7 @@ TestApp is a simple single-page web application featuring AI-powered chat functi
 ├── docs/             # Documentation
 ├── docker/           # Docker configuration
 ├── .github/          # GitHub Actions workflows
+├── load-test.js      # Load testing script
 └── tools/            # Utility scripts and tools
 ```
 
@@ -62,4 +63,12 @@ TestApp is a simple single-page web application featuring AI-powered chat functi
 ### Getting Help
 
 - Check the [GitHub Issues](https://github.com/bniladridas/TestApp/issues) for known problems
-- Review the specific documentation: [API](api.md), [CLI](cli.md), [Deployment](deployment.md), [Development](development.md)
+- Review the specific documentation:
+  - [API Reference](api.md) - Complete API documentation
+  - [Authentication](authentication.md) - User authentication system
+  - [Database](database.md) - Database setup and operations
+  - [Deployment](deployment.md) - Production deployment
+  - [Docker](docker.md) - Containerization
+  - [Development](development.md) - Development setup
+  - [Security](security.md) - Security measures
+  - [Incident Response](incident-response.md) - Incident handling procedures
