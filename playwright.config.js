@@ -54,6 +54,7 @@ export default defineConfig({
       timeout: 120000,
       env: {
         DATABASE_URL:
+          process.env.DATABASE_URL ||
           'postgresql://' + process.env.USER + '@localhost:5432/testapp',
         NODE_ENV: 'test',
       },
