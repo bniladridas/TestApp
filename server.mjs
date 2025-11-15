@@ -42,7 +42,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 // Sentry request handler must be the first middleware
-app.use(Sentry.expressIntegration());
+// Note: expressIntegration is configured in Sentry.init(), not used as middleware
 
 // Security headers
 app.use(helmet());
