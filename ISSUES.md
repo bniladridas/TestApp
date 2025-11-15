@@ -59,7 +59,7 @@
 ## Status
 
 **Production-ready**
-Coverage: **82.47% overall**, **98.4% app code**
+Coverage: **82.94% overall**, **97.8% app code**
 Live: [https://ui-lib-fawn.vercel.app](https://ui-lib-fawn.vercel.app)
 
 ## Features
