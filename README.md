@@ -35,6 +35,8 @@ Set environment variables: `GEMINI_API_KEY`, `DATABASE_URL` as needed.
 
 The full API of this application can be found in [docs/api.md](docs/api.md).
 
+SDK documentation: [docs/sdk.md](docs/sdk.md).
+
 ## Installation
 
 ### Quick Setup (Recommended)
