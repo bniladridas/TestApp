@@ -17,6 +17,11 @@
 
 ## Recently Completed
 
+- [x] AI-powered CLI with conversation memory and interactive commands
+- [x] CLI persistent history storage in user config directory
+- [x] CLI comprehensive error handling and user feedback
+- [x] CLI unit and e2e testing with CI integration
+- [x] CLI documentation and cross-platform compatibility
 - [x] Add CLI network-error handling
 - [x] Code coverage: 82.94% → 87.82% overall (98.88% app code)
 - [x] Vercel health check API: Fix 404 in CI deployments
@@ -67,6 +72,7 @@ Live: https://ui-lib-fawn.vercel.app
 ## Features
 
 - Gemini-powered chat
+- AI-powered CLI with conversation memory
 - Auth (JWT)
 - i18n
 - PWA + offline
