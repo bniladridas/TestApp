@@ -17,7 +17,7 @@
 
 ## Recently Completed
 
-- [x] Fixed CircleCI Node 20 image tag to cimg/node:20.11.1
+- [x] Fixed CircleCI postgres image to postgres:15
 - [x] Switched to happy-dom for faster and more reliable testing
 - [x] CircleCI configuration added for alternative CI/CD
 - [x] AI-powered CLI with conversation memory and interactive commands
