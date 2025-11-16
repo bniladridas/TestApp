@@ -1,0 +1,22 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.2
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18.17.0
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+      - run: npx playwright install --with-deps
+      - run: npm run test:e2e
