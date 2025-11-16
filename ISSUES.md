@@ -1,5 +1,7 @@
 # Issue Tracker
 
+**Note:** Issues are now tracked on GitLab. Please use [GitLab Issues](https://gitlab.com/harpertoken/testapp-sdk/-/issues) for reporting bugs and features.
+
 ## Open Issues
 
 - [ ] Optimize chat rendering for large conversations
