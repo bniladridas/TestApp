@@ -5,7 +5,7 @@ stages:
   - e2e
 
 variables:
-  NODE_VERSION: "20"
+  NODE_VERSION: "22"
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -15,7 +15,7 @@ cache:
 
 lint:
   stage: lint
-  image: node:${NODE_VERSION}
+  image: node:${NODE_VERSION}-alpine
   script:
     - npm ci
     - npm run lint
@@ -25,7 +25,7 @@ lint:
 
 build:
   stage: build
-  image: node:${NODE_VERSION}
+  image: node:${NODE_VERSION}-alpine
   script:
     - npm ci
     - npm run build
@@ -39,7 +39,7 @@ build:
 
 test:
   stage: test
-  image: node:${NODE_VERSION}
+  image: node:${NODE_VERSION}-alpine
   services:
     - postgres:15
   variables:
@@ -48,7 +48,9 @@ test:
     POSTGRES_PASSWORD: password
     POSTGRES_DB: testapp
   script:
+    - apk add --no-cache postgresql-client
     - npm ci
+    - sleep 10
     - npm run test:coverage
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   artifacts:
@@ -64,10 +66,16 @@ test:
 e2e:
   stage: e2e
   image: mcr.microsoft.com/playwright:v1.40.0-jammy
+  services:
+    - postgres:15
   script:
+    - apt-get update && apt-get install -y postgresql-client
     - npm ci
     - npx playwright install --with-deps
+    - sleep 10
     - npm run test:e2e
+  variables:
+    DATABASE_URL: postgresql://postgres:password@postgres:5432/testapp
   artifacts:
     when: always
     paths:
