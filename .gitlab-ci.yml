@@ -67,7 +67,11 @@ e2e:
   stage: e2e
   image: mcr.microsoft.com/playwright:v1.40.0-jammy
   services:
-    - postgres:15
+    - name: postgres:15
+      environment:
+        POSTGRES_PASSWORD: password
+        POSTGRES_USER: postgres
+        POSTGRES_DB: testapp
   script:
     - apt-get update && apt-get install -y postgresql-client
     - npm ci
