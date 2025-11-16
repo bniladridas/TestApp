@@ -89,11 +89,48 @@ npm run dev
 
 ## Database Setup
 
-### Local Development
+TestApp uses PostgreSQL for data persistence. The setup script handles this automatically, but manual setup options are available below.
 
-The `setup.sh` script automatically sets up a local PostgreSQL database using Docker.
+### Automated Setup (Recommended)
 
-### Production
+Use the `setup.sh` script for a complete environment setup:
+
+```sh
+./setup.sh
+```
+
+This automatically sets up a local PostgreSQL database using Docker and runs all necessary migrations.
+
+> [!NOTE]
+> The setup script requires Docker for PostgreSQL. Ensure Docker Desktop is running.
+
+### Manual Local Setup
+
+If you prefer manual setup:
+
+1. **Install PostgreSQL** (if not already installed):
+   - macOS: `brew install postgresql`
+   - Ubuntu: `sudo apt install postgresql postgresql-contrib`
+
+2. **Create a database**:
+
+   ```sql
+   CREATE DATABASE testapp;
+   ```
+
+3. **Configure environment variables**:
+   Copy `.env.example` to `.env` and set:
+
+   ```env
+   DATABASE_URL=postgresql://username:password@localhost:5432/testapp
+   ```
+
+4. **Run database migrations**:
+   ```sh
+   npm run migrate
+   ```
+
+### Production Setup
 
 For production deployment on Vercel, use a cloud PostgreSQL provider:
 
@@ -106,7 +143,7 @@ For production deployment on Vercel, use a cloud PostgreSQL provider:
 
 The database tables are created automatically on first run.
 
-See [Database Documentation](docs/database.md), [Database Queries](docs/database-queries.md), and [Deployment Guide](docs/deployment.md) for production setup.
+See [Database Documentation](docs/database.md), [Database Queries](docs/database-queries.md), and [Deployment Guide](docs/deployment.md) for detailed production setup.
 
 ## Usage
 
@@ -200,32 +237,6 @@ npm run rollback  # ⚠️  WARNING: Deletes all data!
 npm run migrate   # Recreate schema
 npm run test:db   # Test database connectivity
 ```
-
-## Database Setup
-
-TestApp uses PostgreSQL for data persistence. The setup script handles this automatically, but for manual setup:
-
-1. **Install PostgreSQL** (if not already installed):
-   - macOS: `brew install postgresql`
-   - Ubuntu: `sudo apt install postgresql postgresql-contrib`
-
-2. **Create a database**:
-
-   ```sql
-   CREATE DATABASE testapp;
-   ```
-
-3. **Configure environment variables**:
-   Copy `.env.example` to `.env` and set:
-
-   ```env
-   DATABASE_URL=postgresql://username:password@localhost:5432/testapp
-   ```
-
-4. **Run database migrations**:
-   ```sh
-   npm run migrate
-   ```
 
 ## Running Tests
 
