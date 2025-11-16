@@ -67,11 +67,7 @@ e2e:
   stage: e2e
   image: mcr.microsoft.com/playwright:v1.40.0-jammy
   services:
-    - name: postgres:15
-      environment:
-        POSTGRES_PASSWORD: password
-        POSTGRES_USER: postgres
-        POSTGRES_DB: testapp
+    - postgres:15
   script:
     - apt-get update && apt-get install -y postgresql-client
     - npm ci
@@ -79,6 +75,9 @@ e2e:
     - sleep 10
     - npm run test:e2e
   variables:
+    POSTGRES_PASSWORD: password
+    POSTGRES_USER: postgres
+    POSTGRES_DB: testapp
     DATABASE_URL: postgresql://postgres:password@postgres:5432/testapp
   artifacts:
     when: always
