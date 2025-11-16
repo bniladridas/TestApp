@@ -17,7 +17,7 @@
 
 ## Recently Completed
 
-- [x] Updated CircleCI Node version to fix tracingChannel import error
+- [x] Fixed CircleCI image tag to cimg/node:18.19.1
 - [x] Switched to happy-dom for faster and more reliable testing
 - [x] CircleCI configuration added for alternative CI/CD
 - [x] AI-powered CLI with conversation memory and interactive commands
