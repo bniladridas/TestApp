@@ -42,6 +42,9 @@ Available modules can be imported directly via subpaths (e.g., `@harpertoken/tes
 
 Set environment variables: `GEMINI_API_KEY`, `DATABASE_URL` as needed.
 
+> [!IMPORTANT]
+> Ensure `GEMINI_API_KEY` is set before using AI features to avoid errors.
+
 The full API of this application can be found in [docs/api.md](docs/api.md).
 
 SDK documentation: [docs/sdk.md](docs/sdk.md).
@@ -54,10 +57,13 @@ Use the automated setup script for a complete environment setup:
 
 ```sh
 git clone https://github.com/bniladridas/TestApp.git
-cd testapp
+cd TestApp
 ./setup.sh
 npm run dev
 ```
+
+> [!NOTE]
+> The setup script requires Docker for PostgreSQL. Ensure Docker Desktop is running.
 
 This script installs dependencies, sets up PostgreSQL, creates the database, runs migrations, and starts the development server.
 
