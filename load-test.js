@@ -20,27 +20,13 @@ const BASE_URL = 'http://localhost:3001';
 export default function () {
   // Health check
   let response = http.get(`${BASE_URL}/api/health`);
-  check(response, { 'health check status is 200': (r) => r.status === 200 });
-
-  // Simulate user signup (if needed)
-  // Note: In real load testing, you might want to create test users or use existing ones
-
-  // Simulate AI chat request
-  let payload = JSON.stringify({
-    message: 'Hello, how are you?',
-  });
-
-  let headers = {
-    'Content-Type': 'application/json',
-    // Add authorization header if needed
-    // 'Authorization': 'Bearer ' + token,
-  };
-
-  response = http.post(`${BASE_URL}/api/ask-test-ai`, payload, { headers });
   check(response, {
-    'AI chat status is 200': (r) => r.status === 200,
+    'health check status is 200': (r) => r.status === 200,
     'response time < 2000ms': (r) => r.timings.duration < 2000,
   });
+
+  // Note: AI chat endpoint requires authentication and may incur costs
+  // Skipping AI chat in load tests to focus on infrastructure performance
 
   sleep(1); // Wait 1 second between iterations
 }
