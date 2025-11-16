@@ -157,3 +157,17 @@ cli/
 ```
 
 The modular design ensures clean separation of concerns and easy maintenance.
+
+## Summary
+
+| Feature              | Description                                                        |
+| -------------------- | ------------------------------------------------------------------ |
+| Persistent Memory    | Preserves conversation context for continuous interaction.         |
+| Interactive Commands | Provides clear, intuitive controls such as `/help` and `/history`. |
+| Cross-Platform       | Operates consistently across all major systems.                    |
+| Error Handling       | Responds gracefully to failures with concise feedback.             |
+| Testing              | Ensures reliability through comprehensive coverage.                |
+| Secure Storage       | Safely manages user data in dedicated config directories.          |
+| Production-Ready     | Elevates the tool from a simple script to a refined AI CLI.        |
+
+_Originally posted by @harper-bot-glitch in https://github.com/bniladridas/TestApp/pull/94#pullrequestreview-3470203553_
