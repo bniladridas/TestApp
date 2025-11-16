@@ -65,11 +65,11 @@ test:
 
 e2e:
   stage: e2e
-  image: mcr.microsoft.com/playwright:v1.40.0-jammy
+  image: node:22-alpine
   services:
     - postgres:15
   script:
-    - apt-get update && apt-get install -y postgresql-client
+    - apk add --no-cache postgresql-client
     - npm ci
     - npx playwright install --with-deps
     - sleep 10
