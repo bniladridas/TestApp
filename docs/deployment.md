@@ -5,8 +5,16 @@ TestApp is configured for deployment on Vercel.
 ## Vercel Setup
 
 1. Connect your GitHub repository to Vercel
-2. Add `GEMINI_API_KEY` to Environment Variables
-3. Deploy automatically on push to main
+2. Set up database on Neon (see Database Setup below)
+3. Add environment variables (see Environment Variables below)
+4. Deploy automatically on push to main
+
+## Database Setup
+
+1. Sign up at [Neon](https://neon.tech)
+2. Create a new project
+3. In the project overview, copy the `DATABASE_URL` connection string
+4. The database tables are created automatically on first API call
 
 ## Build Configuration
 
@@ -16,16 +24,19 @@ TestApp is configured for deployment on Vercel.
 
 ## Environment Variables
 
+- `DATABASE_URL`: PostgreSQL connection string from Neon
+- `JWT_SECRET`: Secret key for JWT tokens (generate with `openssl rand -base64 32`)
 - `GEMINI_API_KEY`: Your Google AI API key
-- `SENTRY_DSN`: Sentry DSN for backend error monitoring
-- `VITE_SENTRY_DSN`: Sentry DSN for frontend error monitoring
+- `SENTRY_DSN`: Sentry DSN for backend error monitoring (optional)
+- `VITE_SENTRY_DSN`: Sentry DSN for frontend error monitoring (optional)
 
 ## Manual Deployment
 
+Vercel handles deployment automatically. For manual builds:
+
 ```bash
 npm run build
-# Deploy dist/ to static hosting
-# Deploy api/ to serverless
+# Vercel deploys dist/ and api/ serverless functions
 ```
 
 ## CDN and Asset Optimization
