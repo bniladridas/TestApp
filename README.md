@@ -1,8 +1,7 @@
 # TestApp
 
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen)](https://nodejs.org/)
-[![E2E Tests](https://github.com/bniladridas/TestApp/actions/workflows/e2e.yml/badge.svg)](https://github.com/bniladridas/TestApp/actions/workflows/e2e.yml)
-[![Build and Push Docker Image](https://github.com/bniladridas/TestApp/actions/workflows/docker.yml/badge.svg)](https://github.com/bniladridas/TestApp/actions/workflows/docker.yml)
+[![Pipeline](https://gitlab.com/harpertoken/testapp-sdk/badges/main/pipeline.svg)](https://gitlab.com/harpertoken/testapp-sdk/-/pipelines)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A modern single-page web application with AI-powered chat functionality, featuring internationalization, offline support, and accessibility enhancements. Built with React, Vite, and integrated with Google's Gemini AI.
@@ -56,8 +55,8 @@ SDK documentation: [docs/sdk.md](docs/sdk.md).
 Use the automated setup script for a complete environment setup:
 
 ```sh
-git clone https://github.com/bniladridas/TestApp.git
-cd TestApp
+git clone https://gitlab.com/harpertoken/testapp-sdk.git
+cd testapp-sdk
 ./setup.sh
 npm run dev
 ```
@@ -73,7 +72,7 @@ A live demo is available at: **[https://ui-lib-fawn.vercel.app](https://ui-lib-f
 
 - **Login Page**: [https://ui-lib-fawn.vercel.app/login](https://ui-lib-fawn.vercel.app/login)
 - **Signup**: Create a new account to test the full functionality
-- **Automated Deployment**: Changes to main branch deploy automatically via GitHub Actions
+- **Automated Deployment**: Changes to main branch deploy automatically via GitLab CI/CD
 
 ### Manual Setup
 
@@ -281,40 +280,40 @@ The e2e tests automatically start the servers and test the full user flow.
 
 ## CI/CD
 
-The CI/CD pipeline runs automated tests, linting, security checks, and deployments using GitHub Actions. It includes:
+The CI/CD pipeline runs automated tests, linting, security checks, and deployments using GitLab CI/CD. It includes:
 
 - **Testing**: Unit tests, E2E tests with Playwright, linting, code coverage
 - **Security**: Docker image vulnerability scanning with Trivy
 - **Deployment**: Automated deployment to Vercel on main branch pushes
 - **Load Testing**: Weekly performance testing with k6
 
-### Workflows
+### Pipelines
 
-- **`e2e.yml`**: Runs tests on every push/PR (unit, e2e, docker build)
-- **`docker.yml`**: Builds and pushes Docker images on main branch
-- **`load-test.yml`**: Runs performance tests weekly
-- **`deploy.yml`**: Deploys to Vercel production (requires secrets)
+- **Main Pipeline**: Runs lint, build, test, e2e on every push/MR
+- **Docker Pipeline**: Builds and pushes Docker images on main branch
+- **Load Test Pipeline**: Runs performance tests weekly
+- **Deploy Pipeline**: Deploys to Vercel production (requires variables)
 
 ### Setting up Automated Deployment
 
-To enable automated Vercel deployments, add these secrets to your GitHub repository:
+To enable automated Vercel deployments, add these variables to your GitLab project:
 
-1. Go to **Settings → Secrets and variables → Actions**
-2. Add the following secrets:
+1. Go to **Settings → CI/CD → Variables**
+2. Add the following variables:
    - `VERCEL_TOKEN`: Your Vercel access token
    - `VERCEL_ORG_ID`: Your Vercel organization ID
    - `VERCEL_PROJECT_ID`: Your Vercel project ID
 
-### Testing Workflows Locally
+### Testing Pipelines Locally
 
-Use [act](https://github.com/nektos/act) to test GitHub Actions workflows locally:
+Use [gitlab-ci-local](https://github.com/firecow/gitlab-ci-local) to test GitLab CI pipelines locally:
 
 ```sh
-# Test e2e workflow
-act -j e2e -P ubuntu-latest=catthehacker/ubuntu:act-latest --container-architecture linux/amd64 --secret GEMINI_API_KEY=your_key
+# Install gitlab-ci-local
+npm install -g gitlab-ci-local
 
-# Test docker workflow
-act -j docker -P ubuntu-latest=catthehacker/ubuntu:act-latest --container-architecture linux/amd64 --secret DOCKER_USERNAME=your_username --secret DOCKER_PASSWORD=your_password
+# Test pipeline
+gitlab-ci-local --file .gitlab-ci.yml
 ```
 
 ## Requirements
