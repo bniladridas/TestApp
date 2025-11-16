@@ -1,0 +1,47 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and Push Docker Image
+        id: build
+        uses: ./.github/actions/build-and-push-docker
+        with:
+          docker_username: ${{ secrets.DOCKER_USERNAME }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
+          ghcr_token: ${{ secrets.GHCR_TOKEN }}
+          repo_name: ${{ github.event.repository.name }}
+          github_repo: ${{ github.repository }}
+
+      - name: Set Docker Hub image env
+        run: echo "DOCKER_HUB_IMAGE=${{ steps.build.outputs.docker_hub_image }}" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'image'
+          scan-ref: '${{ env.DOCKER_HUB_IMAGE }}:latest'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v4
+        if: always() && hashFiles('trivy-results.sarif') != ''
+        with:
+          sarif_file: 'trivy-results.sarif'
