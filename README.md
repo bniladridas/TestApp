@@ -100,7 +100,7 @@ For production deployment on Vercel, use a cloud PostgreSQL provider:
 
 The database tables are created automatically on first run.
 
-See [Database Documentation](docs/database.md) and [Database Queries](docs/database-queries.md) for details.
+See [Database Documentation](docs/database.md), [Database Queries](docs/database-queries.md), and [Deployment Guide](docs/deployment.md) for production setup.
 
 ## Usage
 
