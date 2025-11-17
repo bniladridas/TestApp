@@ -15,7 +15,7 @@ original_email=$(git config user.email)
 
 # Set bot profile for commit
 git config user.name "TestApp Bot"
-git config user.email "bot@testapp.com"
+git config user.email "244429612+testapp-bot@users.noreply.github.com"
 
 # Generate commit message using AI
 diff=$(git diff --cached)
