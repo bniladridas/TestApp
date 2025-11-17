@@ -26,11 +26,6 @@ commit.committer_name = author_name.encode('utf-8')
 commit.committer_email = author_email.encode('utf-8')
 " --force
 
-echo "Syncing to remote..."
-git remote add origin https://github.com/bniladridas/TestApp.git
-
-git push --force --all --quiet origin
-
-git push --force --tags --quiet origin
-
-echo "Synced."
+echo "Rewriting complete. To sync to remote, run:"
+echo "git push --force --all origin"
+echo "git push --force --tags origin"
