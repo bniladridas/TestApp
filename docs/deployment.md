@@ -1,6 +1,6 @@
 # Deployment
 
-TestApp is configured for deployment on Vercel.
+TestApp is configured for deployment on Vercel and GitLab.
 
 ## Vercel Setup
 
@@ -29,6 +29,14 @@ TestApp is configured for deployment on Vercel.
 - `GEMINI_API_KEY`: Your Google AI API key
 - `SENTRY_DSN`: Sentry DSN for backend error monitoring (optional)
 - `VITE_SENTRY_DSN`: Sentry DSN for frontend error monitoring (optional)
+
+## GitLab Deployment
+
+TestApp is mirrored to GitLab for additional CI/CD.
+
+- **Trigger**: Automatic on push to main via GitHub Actions
+- **Process**: Rewrites commit messages, pushes to GitLab
+- **Requirements**: GITLAB_TOKEN secret in GitHub repo
 
 ## Manual Deployment
 

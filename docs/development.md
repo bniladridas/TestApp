@@ -20,6 +20,12 @@
 - **E2E tests**: `npm run test:e2e`
 - **Preflight**: `npm run preflight` (lint + duplicate-check + build + coverage)
 
+## Scripts
+
+- **Safe Push**: `./safe-push.sh` - Stages, auto-commits, rewrites messages, pushes to GitHub
+- **Rewrite Commits**: `./rewrite-commits.sh` - Rewrites commit messages, force pushes to remote
+- **Commit Template**: `.gitmessage` - Template for conventional commits
+
 ## Code Quality
 
 - **Linting**: `npm run lint`

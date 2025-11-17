@@ -43,4 +43,4 @@ Ensure you have a backup or are working on a fresh clone.
 4. Force pushes all branches to origin
 5. Force pushes all tags to origin
 
-Note: Uses `git filter-repo` for modern, efficient rewriting.
+Note: Uses `git filter-repo` for modern, efficient rewriting. Called by `safe-push.sh` for automated workflow.
