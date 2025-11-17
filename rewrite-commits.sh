@@ -12,22 +12,16 @@ if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
   exit 0
 fi
 
-export AUTHOR_NAME=$(git config user.name)
-export AUTHOR_EMAIL=$(git config user.email)
-
 echo "Processing commits..."
 git filter-repo --commit-callback "
 import subprocess
-import os
 message_str = commit.message.decode('utf-8') if isinstance(commit.message, bytes) else commit.message
 result = subprocess.run(['python3', 'hooks/rewrite_msg.py'], input=message_str, capture_output=True, text=True)
 commit.message = result.stdout.encode('utf-8')
-author_name = os.environ.get('AUTHOR_NAME', 'Unknown')
-author_email = os.environ.get('AUTHOR_EMAIL', 'unknown@example.com')
-commit.author_name = author_name.encode('utf-8')
-commit.author_email = author_email.encode('utf-8')
-commit.committer_name = author_name.encode('utf-8')
-commit.committer_email = author_email.encode('utf-8')
+commit.author_name = b'Niladri Das'
+commit.author_email = b'bniladridas@users.noreply.github.com'
+commit.committer_name = b'Niladri Das'
+commit.committer_email = b'bniladridas@users.noreply.github.com'
 " --force
 
 echo "Syncing to remote..."
