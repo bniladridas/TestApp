@@ -9,6 +9,10 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
+# Save original profile
+original_name=$(git config user.name)
+original_email=$(git config user.email)
+
 # Set bot profile for commit
 git config user.name "TestApp Bot"
 git config user.email "bot@testapp.com"
@@ -23,6 +27,10 @@ fi
 
 # Commit
 git commit -m "$msg"
+
+# Restore original profile
+git config user.name "$original_name"
+git config user.email "$original_email"
 
 # Run rewrite commits
 echo "y" | ./rewrite-commits.sh
