@@ -286,6 +286,7 @@ The CI/CD pipeline runs automated tests, linting, security checks, and deploymen
 - **Security**: Docker image vulnerability scanning with Trivy
 - **Deployment**: Automated deployment to Vercel on main branch pushes
 - **GitLab Sync**: Automated push to GitLab mirror on main branch pushes (via GitHub Actions)
+- **Bot Automation**: Automated issue management on issue events (labeling, comments via bot account)
 - **Load Testing**: Weekly performance testing with k6
 
 ### Pipelines
