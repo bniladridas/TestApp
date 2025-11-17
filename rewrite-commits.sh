@@ -12,8 +12,8 @@ if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
   exit 0
 fi
 
-AUTHOR_NAME=$(git config user.name)
-AUTHOR_EMAIL=$(git config user.email)
+export AUTHOR_NAME=$(git config user.name)
+export AUTHOR_EMAIL=$(git config user.email)
 
 echo "Processing commits..."
 git filter-repo --commit-callback "
