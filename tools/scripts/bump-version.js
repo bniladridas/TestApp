@@ -69,6 +69,15 @@ console.log(
   `Bumping version from ${currentVersion} to ${newVersion} (${bumpType})`,
 );
 
+// Check if tag already exists
+try {
+  execSync(`git tag -l v${newVersion}`, { stdio: 'pipe' });
+  console.log(`Tag v${newVersion} already exists, skipping bump`);
+  process.exit(0);
+} catch (e) {
+  // Tag does not exist, proceed
+}
+
 // Update package.json
 packageJson.version = newVersion;
 writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
