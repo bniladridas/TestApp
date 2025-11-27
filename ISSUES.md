@@ -29,6 +29,7 @@
 - [x] CLI documentation and cross-platform compatibility
 - [x] CodeQL Advanced security scanning workflow
 - [x] NPM package release v1.0.1 with CLI features
+- [x] NPM package release v1.2.0
 - [x] Add CLI network-error handling
 - [x] Code coverage: 82.94% → 87.82% overall (98.88% app code)
 - [x] Vercel health check API: Fix 404 in CI deployments
